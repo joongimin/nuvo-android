@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/inner_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+    <ViewFlipper 
+        android:id="@+id/vfMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+	    
+	    <LinearLayout
+	        android:id="@+id/vgMain" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:background="#FFFFFFFF">
+	        
+	        <RelativeLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="45dip"
+		        android:paddingLeft="2dip"
+		        android:paddingRight="2dip"
+		        android:background="#FF000000">
+		        <Button style="@android:style/Widget.Button.Small"
+		            android:id="@+id/menu_left"
+		            android:layout_width="35dip"
+		            android:layout_height="wrap_content"
+		            android:layout_marginRight="10dip"
+		            android:layout_centerVertical="true"
+		            android:layout_alignParentLeft="true"
+		            android:text="▶" />
+		        <Button style="@android:style/Widget.Button.Small"
+		            android:id="@+id/menu_right"
+		            android:layout_width="35dip"
+		            android:layout_height="wrap_content"
+		            android:layout_marginRight="10dip"
+		            android:layout_centerVertical="true"
+		            android:layout_alignParentRight="true"
+		            android:text="◀" />
+		        <TextView android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/menu_left"
+		            android:layout_toLeftOf="@id/menu_right"
+		            android:layout_centerVertical="true"
+		            android:textSize="19sp"
+		            android:textColor="#ffffff"
+		            android:gravity="center"
+		            android:text="slide out menu"/>
+		    </RelativeLayout>
+	    </LinearLayout>
+        
+        <AbsoluteLayout
+	        android:id="@+id/vgMenuLeft" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:background="#FFFF0000">
+	    </AbsoluteLayout>
+	    
+	    <AbsoluteLayout
+	        android:id="@+id/vgMenuRight" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:background="#FF0000FF">
+	    </AbsoluteLayout>
+        
+    </ViewFlipper>
+    
+    <ImageView 
+        android:id="@+id/vCover"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/t"
+        android:scaleType="fitXY"
+        android:background="#ccffffff"/>
+        
+</RelativeLayout>

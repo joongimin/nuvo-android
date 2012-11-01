@@ -1,0 +1,219 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+    
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+    	android:orientation="vertical" >
+        
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="10sp"
+		    android:textSize="10sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="11sp"
+		    android:textSize="11sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="12sp"
+		    android:textSize="12sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="13sp"
+		    android:textSize="13sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="14sp"
+		    android:textSize="14sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="15sp"
+		    android:textSize="15sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="16sp"
+		    android:textSize="16sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="17sp"
+		    android:textSize="17sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="18sp"
+		    android:textSize="18sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="19sp"
+		    android:textSize="19sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="20sp"
+		    android:textSize="20sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="21sp"
+		    android:textSize="21sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="22sp"
+		    android:textSize="22sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="23sp"
+		    android:textSize="23sp" />
+		
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="24sp"
+		    android:textSize="24sp" />
+    </LinearLayout>
+    
+    
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+    	android:orientation="vertical" >
+		
+
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="25sp"
+	    android:textSize="25sp" />
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="26sp"
+	    android:textSize="26sp" />
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="27sp"
+	    android:textSize="27sp" />
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="28sp"
+	    android:textSize="28sp" />
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="29sp"
+	    android:textSize="29sp" />
+	
+	<TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="30sp"
+           android:textSize="30sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="31sp"
+           android:textSize="31sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="32sp"
+           android:textSize="32sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="33sp"
+           android:textSize="33sp" />
+	</LinearLayout>
+	
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+    	android:orientation="vertical" >
+       
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="34sp"
+           android:textSize="34sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="35sp"
+           android:textSize="35sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="36sp"
+           android:textSize="36sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="37sp"
+           android:textSize="37sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="38sp"
+           android:textSize="38sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="39sp"
+           android:textSize="39sp" />
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="40sp"
+           android:textSize="40sp" />
+    </LinearLayout>
+	
+</LinearLayout>
