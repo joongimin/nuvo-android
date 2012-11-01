@@ -2,6 +2,7 @@ package com.example.slideout;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,13 +10,19 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,19 +38,101 @@ public class MainActivity extends Activity {
 	Button btnMenuLeft;
 	Button btnMenuRight;
 	
+	ImageView ivCover;
 	Bitmap bmCover;
+	ViewGroup vgCover;
+	View vLeftShadow;
+	View vRightShadow;
+
+	private static final int DURATION_MS = 1000;
+	private Animation mStartAnimation;
+	private Animation mStopAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        vLeftShadow = findViewById(R.id.vLeftShadow);
+        vRightShadow = findViewById(R.id.vRightShadow);
         
-        ImageView v = (ImageView) findViewById(R.id.vCover);
-        v.setOnTouchListener(new OnTouchListener() {
+        vLeftShadow.setVisibility(View.GONE);
+        vRightShadow.setVisibility(View.GONE);
+        
+        vgCover = (ViewGroup) findViewById(R.id.vgCover);
+        boolean mReverse = false;
+        int width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+		int displayWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
+        int shift = (mReverse ? -1 : 1) * (width - displayWidth);
+    	mStartAnimation = new TranslateAnimation(
+				TranslateAnimation.ABSOLUTE, 0,
+				TranslateAnimation.ABSOLUTE, -shift,
+				TranslateAnimation.ABSOLUTE, 0,
+				TranslateAnimation.ABSOLUTE, 0
+				);
+		mStartAnimation.setDuration(DURATION_MS);
+		mStartAnimation.setFillAfter(true);
+		mStartAnimation.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+		mStopAnimation = new TranslateAnimation(
+				TranslateAnimation.ABSOLUTE, -shift,
+				TranslateAnimation.ABSOLUTE, 0,
+				TranslateAnimation.ABSOLUTE, 0,
+				TranslateAnimation.ABSOLUTE, 0
+				);
+		mStopAnimation.setDuration(DURATION_MS);
+		mStopAnimation.setFillAfter(true);
+		mStopAnimation.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				ivCover.setBackgroundColor(Color.TRANSPARENT);
+		        vLeftShadow.setVisibility(View.GONE);
+		        vRightShadow.setVisibility(View.GONE);
+				vfMain.setDisplayedChild(0);
+			}
+		});
+        
+        ivCover = (ImageView) findViewById(R.id.vCover);
+        ivCover.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
-				// TODO Auto-generated method stub
+				if(vfMain.getDisplayedChild() != 0) {
+					vgCover.setAnimation(mStopAnimation);
+			        return true;
+				}
 				return false;
 			}
 		});
@@ -72,9 +161,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				updateCover();
-				Toast.makeText(MainActivity.this, "Left", Toast.LENGTH_SHORT).show();
 				Drawable drawable = new BitmapDrawable(bmCover);
-				vgMenuLeft.setBackgroundDrawable(drawable);
+				ivCover.setBackgroundDrawable(drawable);
+		        vLeftShadow.setVisibility(View.VISIBLE);
+		        
+		        vgCover.setAnimation(mStartAnimation);
+				Toast.makeText(MainActivity.this, "Left", Toast.LENGTH_SHORT).show();
 				vfMain.setDisplayedChild(1);
 			}
 		});

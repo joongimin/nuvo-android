@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/inner_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_android" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:background="#bb000000">
+
+        <Button style="@android:style/Widget.Button.Small"
+            android:id="@+id/left_button"
+            android:layout_width="35dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:text="▷" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Facebook-like slide-out nav"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+        <Button style="@android:style/Widget.Button.Small"
+            android:id="@+id/right_button"
+            android:layout_width="35dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="◁" />
+
+    </RelativeLayout>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FF0000"
+        android:text="This is test"/>
+
+</RelativeLayout>

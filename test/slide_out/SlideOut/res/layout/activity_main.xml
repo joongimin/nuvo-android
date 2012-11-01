@@ -39,8 +39,8 @@
 		            android:text="◀" />
 		        <TextView android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/menu_left"
-		            android:layout_toLeftOf="@id/menu_right"
+		            android:layout_toRightOf="@+id/menu_left"
+		            android:layout_toLeftOf="@+id/menu_right"
 		            android:layout_centerVertical="true"
 		            android:textSize="19sp"
 		            android:textColor="#ffffff"
@@ -65,12 +65,30 @@
         
     </ViewFlipper>
     
-    <ImageView 
-        android:id="@+id/vCover"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:src="@drawable/t"
-        android:scaleType="fitXY"
-        android:background="#ccffffff"/>
+    <RelativeLayout
+        android:id="@+id/vgCover" 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+	    <View
+	        android:id="@+id/vLeftShadow"
+	        android:layout_width="5dp"
+	        android:layout_height="fill_parent"
+	        android:layout_alignParentLeft="true"
+	        android:background="@drawable/dropshadow_left"/>
+	    <View
+	        android:id="@+id/vRightShadow"
+	        android:layout_width="5dp"
+	        android:layout_height="fill_parent"
+	        android:layout_alignParentRight="true"
+	        android:background="@drawable/dropshadow_right"/>
+	    <ImageView 
+	        android:id="@+id/vCover"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_toLeftOf="@+id/vRightShadow"
+	        android:layout_toRightOf="@+id/vLeftShadow"
+	        android:scaleType="fitXY"
+	        android:background="#00000000"/>
+	</RelativeLayout>
         
 </RelativeLayout>
