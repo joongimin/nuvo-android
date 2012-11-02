@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar" />
+    
+    <style name="TextShadow">
+        <item name="android:shadowColor">#87000000</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+</resources>
