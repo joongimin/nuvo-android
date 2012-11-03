@@ -44,12 +44,28 @@
 		    
     </RelativeLayout>
     
-    <ViewPager
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/vgTitle">
-        
-    </ViewPager>
+	    <!-- 
+	    <LinearLayout
+            android:id="@+id/vgProducts"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+	    <LinearLayout
+            android:id="@+id/vgFeeds"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+	    <LinearLayout
+            android:id="@+id/vgBrands"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+		-->
+    </android.support.v4.view.ViewPager>
+    
     <!-- 
     <ViewFlipper 
         android:layout_width="fill_parent"
