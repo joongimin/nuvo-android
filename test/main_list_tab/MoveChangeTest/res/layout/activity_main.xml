@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout 
+        android:id="@+id/vgLayout"
+	   	android:layout_width="fill_parent"
+	   	android:layout_height="wrap_content"
+    	android:orientation="horizontal" >
+    	
+	    <TextView
+	        android:id="@+id/tv1"
+	        android:background="#FFFF0000"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="PRODUCTS"
+	        tools:context=".MainActivity" />
+
+	    <TextView
+	        android:id="@+id/tv2"
+	        android:background="#FFFFFF00"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="BRANDS"
+	        tools:context=".MainActivity" />
+	
+	    <TextView
+	        android:id="@+id/tv3"
+	        android:background="#FFFF00FF"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="USERS"
+	        tools:context=".MainActivity" />
+	
+	    <TextView
+	        android:id="@+id/tv4"
+	        android:background="#FF0000FF"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="TESTS"
+	        tools:context=".MainActivity" />
+    </LinearLayout>
+
+</LinearLayout>

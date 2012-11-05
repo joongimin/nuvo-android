@@ -1,0 +1,2 @@
+FrameLayout을 이용하여,
+Image기반이 아니라 실제 레이아웃을 이동시키는 Slide Out 기능
