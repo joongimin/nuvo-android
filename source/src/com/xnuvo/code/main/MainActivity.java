@@ -14,8 +14,12 @@ public class MainActivity extends Activity {
 
 	private Button btnTabMenu;
 	private Button btnNotiMenu;
+	
+	private TabBarView tabBar;
+	private String[] tabBarList = new String[]{"뉴스 피드", "작품", "작가"};
 
-	private ViewPager vpList;
+	public ViewPager vpList;
+	public boolean isVpForceMove = false;
 	private MainPagerAdapter vpListAdapter;
 	
     @Override
@@ -31,13 +35,15 @@ public class MainActivity extends Activity {
         btnTabMenu.setOnClickListener(OnClickListener);
         btnNotiMenu = (Button) findViewById(R.id.btnNotiMenu);
         btnNotiMenu.setOnClickListener(OnClickListener);
+        //// TabBar
+        tabBar = (TabBarView) findViewById(R.id.tabbar);
+        tabBar.setInfo(tabBarList, 0);
         //// List
         vpList = (ViewPager) findViewById(R.id.vpList);
-        vpListAdapter = new MainPagerAdapter(getApplicationContext(), 3, 15);
+        vpListAdapter = new MainPagerAdapter(getApplicationContext(), tabBarList.length, 15);
         vpList.setAdapter(vpListAdapter);
+        vpList.setCurrentItem(vpListAdapter.getCount()/tabBarList.length*2);
         vpList.setOnPageChangeListener(OnPageChangeListener);
-//        vpList.setCurrentItem(vpListAdapter.getCount()/2-vpListAdapter.getCount()/2%vpCount);
-        vpList.setCurrentItem(40);
     }
 
     @Override
@@ -63,39 +69,39 @@ public class MainActivity extends Activity {
 	};
 	
 	ViewPager.OnPageChangeListener OnPageChangeListener = new ViewPager.OnPageChangeListener() {
+		int beforePosition;
 		@Override
 		public void onPageSelected(int position) {
-			Log.i("Main", "selected: "+position);
+//			Log.i("Main", "selected: "+position);
+			if(!isVpForceMove) {
+				isVpForceMove = true;
+				if(position < beforePosition) {
+					tabBar.moveLeft();
+				} else {
+					tabBar.moveRight();
+				}
+				isVpForceMove = false;
+			}
 		}
 		@Override
 		public void onPageScrolled(int position, float positionOffest, int positionOffsetPixels) {
 //			Log.i("Main", position+" "+positionOffest+" "+positionOffsetPixels);
 			if(positionOffest == 0.0) {
+				isVpForceMove = true;
 				if(position == 1) {
 					vpList.setCurrentItem(vpListAdapter.getCircularFrontCount(), false);
 				} else if(position == (vpListAdapter.getCount()-1)) {
 					vpList.setCurrentItem(vpListAdapter.getCircularBackCount(), false);
 				}
+				isVpForceMove = false;
 			}
-//			if(positionOffest > 0.993) {
-//				if(position == 5) {
-//					vpList.setCurrentItem(3, false);
-//				}
-//////				if(vpList.getCurrentItem() == 2) {
-////				if(position == 2) {
-////					vpList.setCurrentItem(5, false);
-////				} else if(position == 6) {
-//////				} else if(vpList.getCurrentItem() == 6) {
-////					vpList.setCurrentItem(3, false);
-////				}
-//			}
 		}
-		
 		@Override
 		public void onPageScrollStateChanged(int state) {
 //			Log.i("Main", ""+state);
-//			if(ViewPager.SCROLL_STATE_IDLE == state) {
-//			}
+			if(ViewPager.SCROLL_STATE_DRAGGING == state) {
+				beforePosition = vpList.getCurrentItem();
+			}
 		}
 	}; 
 }
