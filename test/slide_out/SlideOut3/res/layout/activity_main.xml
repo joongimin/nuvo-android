@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/leftMenu"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        
+        <Button 
+            android:id="@+id/btnLeftMenu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="left"
+            android:text="left"/>
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rightMenu"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        
+        <Button 
+            android:id="@+id/btnRightMenu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:text="right"/>
+        
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+	    <ImageView
+	        android:layout_width="30dp"
+	        android:layout_height="fill_parent"
+	        android:background="@drawable/dropshadow_left" />
+        <Button 
+            android:id="@+id/btnMain"
+            android:layout_width="320dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="main"/>
+	    <ImageView
+	        android:layout_width="30dp"
+	        android:layout_height="fill_parent"
+	        android:background="@drawable/dropshadow_right" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -15,12 +15,12 @@ public class MainActivity extends Activity {
 	private Button btnTabMenu;
 	private Button btnNotiMenu;
 	
-	private TabBarView tabBar;
+	private TabTitleView tabBar;
 	private String[] tabBarList = new String[]{"뉴스 피드", "작품", "작가"};
 
 	public ViewPager vpList;
 	public boolean isVpForceMove = false;
-	private MainPagerAdapter vpListAdapter;
+	private TabItemView vpListAdapter;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,11 @@ public class MainActivity extends Activity {
         btnNotiMenu = (Button) findViewById(R.id.btnNotiMenu);
         btnNotiMenu.setOnClickListener(OnClickListener);
         //// TabBar
-        tabBar = (TabBarView) findViewById(R.id.tabbar);
+        tabBar = (TabTitleView) findViewById(R.id.tabbar);
         tabBar.setInfo(tabBarList, 0);
         //// List
         vpList = (ViewPager) findViewById(R.id.vpList);
-        vpListAdapter = new MainPagerAdapter(getApplicationContext(), tabBarList.length, 15);
+        vpListAdapter = new TabItemView(getApplicationContext(), tabBarList.length, 15);
         vpList.setAdapter(vpListAdapter);
         vpList.setCurrentItem(vpListAdapter.getCount()/tabBarList.length*2);
         vpList.setOnPageChangeListener(OnPageChangeListener);

@@ -1,0 +1,5 @@
+SlideOut 관련 예제 종결자.
+단, 구조가 복잡하게 되어 있는 것으로 보임.
+
+
+ActionBarSherlock-master.zip에 의존관계 있음

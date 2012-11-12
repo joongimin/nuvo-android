@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
     
+    <!-- Title Bar -->
     <RelativeLayout 
         android:id="@+id/vgTitle"
 	    android:layout_width="fill_parent"
@@ -42,17 +43,18 @@
 	        android:textColor="#FFFFFFFF"
 	        android:textSize="22dp"
 	        android:textStyle="bold" />
-		    
     </RelativeLayout>
     
-    <com.xnuvo.code.main.TabBarView
+    <!-- Main Item -->
+    
+    <!-- Tab Bar View -->
+    <com.xnuvo.code.main.TabTitleView
         android:id="@+id/tabbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vgTitle"    
         android:background="@drawable/tapbar"/>
-    
-    
+    <!-- Tab Bar Item -->
     <android.support.v4.view.ViewPager
         android:id="@+id/vpList"
         android:layout_width="fill_parent"
@@ -73,30 +75,5 @@
             android:layout_height="fill_parent"/>
 		-->
     </android.support.v4.view.ViewPager>
-    
-    <!-- 
-    <ViewFlipper 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tapbar"
-                android:scaleType="fitXY"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tapbar"
-                android:scaleType="fitXY"/>
-        </LinearLayout>
-    </ViewFlipper>
-    -->
 
 </LinearLayout>
