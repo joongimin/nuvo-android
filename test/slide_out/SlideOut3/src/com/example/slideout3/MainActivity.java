@@ -1,6 +1,7 @@
 package com.example.slideout3;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -26,14 +27,28 @@ public class MainActivity extends Activity {
      RelativeLayout rightMenu;
 
      LinearLayout main;
+     Button btnMain;
+     int btnIdx = 0;
      
      DisplayMetrics metrics;
      int width;
+     
+     Handler handler;
      
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        btnMain = (Button) findViewById(R.id.btnMain);
+        handler = new Handler();
+        handler.post(new Runnable() {
+			@Override
+			public void run() {
+				btnMain.setText(String.valueOf(btnIdx++));
+				handler.postDelayed(this, 100);
+			}
+		});
 
         leftMenu = (RelativeLayout) findViewById(R.id.leftMenu);
         leftMenu.setVisibility(View.INVISIBLE);
