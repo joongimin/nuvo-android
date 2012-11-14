@@ -4,46 +4,104 @@ import com.xnuvo.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
-import android.support.v4.view.ViewPager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ViewFlipper;
 
 public class MainActivity extends Activity {
 
-	private Button btnTabMenu;
-	private Button btnNotiMenu;
-	
-	private TabTitleView tabBar;
-	private String[] tabBarList = new String[]{"뉴스 피드", "작품", "작가"};
+	// Screen info
+	private DisplayMetrics display;
+	private final static int shadowDp = 10;
+	private int shadowWidth; 
 
-	public ViewPager vpList;
-	public boolean isVpForceMove = false;
-	private TabItemView vpListAdapter;
+	// Menu info
+    private final int animTime = 750;
+    private final static int MENU_CATEGORY = 0;
+    private final static int MENU_NOTIFICATION = 1;
+    private int menuMode = 0;
+    private final static int menuBtnDp = 52;
+    private int menuBtnWidth;
+	
+	// Layout component
+    private FrameLayout vgTotal;
+    
+	private Button btnCateMenu;
+	private Button btnNotiMenu;
+
+	private LinearLayout viewMain;
+	private RelativeLayout vgMain;
+	
+	private LinearLayout menuLeft;
+	private LinearLayout menuRight;
+	private ImageView ivShadowLeft;
+	private ImageView ivShadowRight;
+	
+	private ViewFlipper vfTabMain;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+		// Get screen size info
+	    WindowManager wm = ((Activity)this).getWindowManager();
+	    display = new DisplayMetrics();
+	    wm.getDefaultDisplay().getMetrics(display);
+	    
+	    // dp size to width size
+		shadowWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, shadowDp, display);
+		menuBtnWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, menuBtnDp, display);
+		
         // Layout initialize
         setContentView(R.layout.activity_main);
         
         // Layout variable connect  
-        //// Menu
-        btnTabMenu = (Button) findViewById(R.id.btnTabMenu);
-        btnTabMenu.setOnClickListener(OnClickListener);
+        //// Title Button
+        btnCateMenu = (Button) findViewById(R.id.btnCateMenu);
+        btnCateMenu.setOnClickListener(OnClickListener);
         btnNotiMenu = (Button) findViewById(R.id.btnNotiMenu);
         btnNotiMenu.setOnClickListener(OnClickListener);
-        //// TabBar
-        tabBar = (TabTitleView) findViewById(R.id.tabbar);
-        tabBar.setInfo(tabBarList, 0);
-        //// List
-        vpList = (ViewPager) findViewById(R.id.vpList);
-        vpListAdapter = new TabItemView(getApplicationContext(), tabBarList.length, 15);
-        vpList.setAdapter(vpListAdapter);
-        vpList.setCurrentItem(vpListAdapter.getCount()/tabBarList.length*2);
-        vpList.setOnPageChangeListener(OnPageChangeListener);
+        //// View Main
+        viewMain = (LinearLayout) findViewById(R.id.viewMain);
+        FrameLayout.LayoutParams viewMainParams = (FrameLayout.LayoutParams) viewMain.getLayoutParams();//new LinearLayout.LayoutParams(display.widthPixels, LinearLayout.LayoutParams.FILL_PARENT);
+        viewMainParams.width = display.widthPixels + shadowWidth*2;
+        viewMainParams.leftMargin = -shadowWidth; 
+        viewMain.setLayoutParams(viewMainParams);
+        viewMain.setOnClickListener(OnClickListener);
+        viewMain.setClickable(false);
+        //// View Group Main (inside View Main)
+        vgMain = (RelativeLayout) findViewById(R.id.vgMain);
+        LayoutParams vgMainParams = vgMain.getLayoutParams();
+        vgMainParams.width = display.widthPixels;
+        vgMain.setLayoutParams(vgMainParams);
+        //// Menu Shadow
+        LinearLayout.LayoutParams shadowParams = new LinearLayout.LayoutParams(shadowWidth, LinearLayout.LayoutParams.FILL_PARENT);
+        ivShadowLeft = (ImageView) findViewById(R.id.ivShadowLeft); 
+        ivShadowLeft.setLayoutParams(shadowParams);
+        ivShadowRight = (ImageView) findViewById(R.id.ivShadowRight);
+        ivShadowRight.setLayoutParams(shadowParams);
+        //// Menu Layout
+        menuLeft = (LinearLayout) findViewById(R.id.menuLeft);
+        menuLeft.setVisibility(View.INVISIBLE);
+        menuRight = (LinearLayout) findViewById(R.id.menuRight);
+        menuRight.setVisibility(View.INVISIBLE);
+        //// Main View
+        vfTabMain = (ViewFlipper) findViewById(R.id.vfTabMain); 
+        vfTabMain.setOnClickListener(OnClickListener);
     }
 
     @Override
@@ -56,52 +114,133 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			switch(v.getId()) {
-			case R.id.btnTabMenu:
-//				int width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
-//				SlideoutActivity.prepare(MainActivity.this, R.id.vgMain, width);
-//				startActivity(new Intent(MainActivity.this, LeftMenuActivity.class));
-//				overridePendingTransition(0, 0);
+			case R.id.btnCateMenu:
+				visibleMenu(MENU_CATEGORY);
 				break;
 			case R.id.btnNotiMenu:
+				visibleMenu(MENU_NOTIFICATION);
+				break;
+			case R.id.viewMain:
+				invisibleMenu();
 				break;
 			}
 		}
 	};
-	
-	ViewPager.OnPageChangeListener OnPageChangeListener = new ViewPager.OnPageChangeListener() {
-		int beforePosition;
+
+    public void visibleMenu(int mode) {
+    	menuMode = mode;
+    	
+    	TranslateAnimation ta = null;
+    	switch(menuMode) {
+    	case MENU_CATEGORY:
+    		ta = new TranslateAnimation(0, display.widthPixels-menuBtnWidth, 0, 0);
+    		break;
+    	case MENU_NOTIFICATION:
+    		ta = new TranslateAnimation(0, -display.widthPixels+menuBtnWidth, 0, 0);
+    		break;
+    	}
+		ta.setDuration(animTime);
+		ta.setFillEnabled(true);
+		ta.setAnimationListener(MenuOpenAnimationListener);
+		viewMain.startAnimation(ta);
+		
+		childsClickable(viewMain, false);
+    }
+    
+    public void childsClickable(ViewGroup parent, boolean clickable) {
+    	View v = null;
+    	for(int i=0; i<parent.getChildCount(); i++) {
+    		v = parent.getChildAt(i);
+    		v.setClickable(clickable);
+    		if(v instanceof ViewGroup) {
+    			Log.i("ML", "View Group: "+v.getClass().toString());
+    			childsClickable((ViewGroup)v, clickable);
+    		} else if(v instanceof View) {
+    			Log.i("ML", "View: "+v.getClass().toString());
+    		}
+		}
+    }
+
+    Animation.AnimationListener MenuOpenAnimationListener = new AnimationListener() {
+    	
 		@Override
-		public void onPageSelected(int position) {
-//			Log.i("Main", "selected: "+position);
-			if(!isVpForceMove) {
-				isVpForceMove = true;
-				if(position < beforePosition) {
-					tabBar.moveLeft();
-				} else {
-					tabBar.moveRight();
-				}
-				isVpForceMove = false;
+		public void onAnimationStart(Animation animation) {
+			switch(menuMode) {
+			case MENU_CATEGORY:
+				menuLeft.setVisibility(View.VISIBLE);
+				break;
+			case MENU_NOTIFICATION:
+				menuRight.setVisibility(View.VISIBLE);
+				break;
 			}
 		}
+		
 		@Override
-		public void onPageScrolled(int position, float positionOffest, int positionOffsetPixels) {
-//			Log.i("Main", position+" "+positionOffest+" "+positionOffsetPixels);
-			if(positionOffest == 0.0) {
-				isVpForceMove = true;
-				if(position == 1) {
-					vpList.setCurrentItem(vpListAdapter.getCircularFrontCount(), false);
-				} else if(position == (vpListAdapter.getCount()-1)) {
-					vpList.setCurrentItem(vpListAdapter.getCircularBackCount(), false);
-				}
-				isVpForceMove = false;
-			}
-		}
+		public void onAnimationRepeat(Animation animation) {}
+		
 		@Override
-		public void onPageScrollStateChanged(int state) {
-//			Log.i("Main", ""+state);
-			if(ViewPager.SCROLL_STATE_DRAGGING == state) {
-				beforePosition = vpList.getCurrentItem();
+		public void onAnimationEnd(Animation animation) {
+			
+			FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) viewMain.getLayoutParams();
+			switch(menuMode) {
+			case MENU_CATEGORY:
+				param.leftMargin = display.widthPixels-shadowWidth-menuBtnWidth;
+				break;
+			case MENU_NOTIFICATION:
+				param.leftMargin = -display.widthPixels-shadowWidth+menuBtnWidth;
+				break;
 			}
+			viewMain.setLayoutParams(param);
+			viewMain.clearAnimation();
+			viewMain.setClickable(true);
 		}
-	}; 
+	};
+
+    public void invisibleMenu() {
+    	
+    	TranslateAnimation ta = null;
+    	switch(menuMode) {
+    	case MENU_CATEGORY:
+    		ta = new TranslateAnimation(0, -(display.widthPixels-menuBtnWidth), 0, 0);
+    		break;
+    	case MENU_NOTIFICATION:
+    		ta = new TranslateAnimation(0, -(-display.widthPixels+menuBtnWidth), 0, 0);
+    		break;
+    	}
+		ta.setDuration(animTime);
+		ta.setFillEnabled(true);
+		ta.setAnimationListener(MenuCloseAnimationListener);
+		viewMain.startAnimation(ta);
+    }
+
+    Animation.AnimationListener MenuCloseAnimationListener = new AnimationListener() {
+    	
+		@Override
+		public void onAnimationStart(Animation animation) {
+			viewMain.setClickable(false);
+		}
+		
+		@Override
+		public void onAnimationRepeat(Animation animation) {}
+		
+		@Override
+		public void onAnimationEnd(Animation animation) {
+			switch(menuMode) {
+			case MENU_CATEGORY:
+				menuLeft.setVisibility(View.INVISIBLE);
+				break;
+			case MENU_NOTIFICATION:
+				menuRight.setVisibility(View.INVISIBLE);
+				break;
+			}
+			
+			FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) viewMain.getLayoutParams();
+			param.leftMargin = -shadowWidth;
+			
+			viewMain.setLayoutParams(param);
+			viewMain.clearAnimation();
+			
+			childsClickable(viewMain, true);
+		}
+	};
 }
