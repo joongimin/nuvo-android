@@ -1,6 +1,7 @@
 package com.xnuvo.code.main;
 
 import com.xnuvo.R;
+import com.xnuvo.code.NuvoApplication;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -25,12 +26,11 @@ import android.widget.ViewFlipper;
 public class MainActivity extends Activity {
 
 	// Screen info
-	private DisplayMetrics display;
 	private final static int shadowDp = 10;
 	private int shadowWidth; 
 
 	// Menu info
-    private final int animTime = 750;
+    private final int animTime = 500;
     private final static int MENU_CATEGORY = 0;
     private final static int MENU_NOTIFICATION = 1;
     private int menuMode = 0;
@@ -56,15 +56,11 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-		// Get screen size info
-	    WindowManager wm = ((Activity)this).getWindowManager();
-	    display = new DisplayMetrics();
-	    wm.getDefaultDisplay().getMetrics(display);
+        ((NuvoApplication)getApplicationContext()).setInfoByFirstActivity(this);
 	    
 	    // dp size to width size
-		shadowWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, shadowDp, display);
-		menuBtnWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, menuBtnDp, display);
+		shadowWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, shadowDp, NuvoApplication.display);
+		menuBtnWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, menuBtnDp, NuvoApplication.display);
 		
         // Layout initialize
         setContentView(R.layout.activity_main);
@@ -77,8 +73,8 @@ public class MainActivity extends Activity {
         btnNotiMenu.setOnClickListener(OnClickListener);
         //// View Main
         viewMain = (LinearLayout) findViewById(R.id.viewMain);
-        FrameLayout.LayoutParams viewMainParams = (FrameLayout.LayoutParams) viewMain.getLayoutParams();//new LinearLayout.LayoutParams(display.widthPixels, LinearLayout.LayoutParams.FILL_PARENT);
-        viewMainParams.width = display.widthPixels + shadowWidth*2;
+        FrameLayout.LayoutParams viewMainParams = (FrameLayout.LayoutParams) viewMain.getLayoutParams();//new LinearLayout.LayoutParams(NuvoApplication.widthPixels, LinearLayout.LayoutParams.FILL_PARENT);
+        viewMainParams.width = NuvoApplication.widthPixels + shadowWidth*2;
         viewMainParams.leftMargin = -shadowWidth; 
         viewMain.setLayoutParams(viewMainParams);
         viewMain.setOnClickListener(OnClickListener);
@@ -86,7 +82,7 @@ public class MainActivity extends Activity {
         //// View Group Main (inside View Main)
         vgMain = (RelativeLayout) findViewById(R.id.vgMain);
         LayoutParams vgMainParams = vgMain.getLayoutParams();
-        vgMainParams.width = display.widthPixels;
+        vgMainParams.width = NuvoApplication.widthPixels;
         vgMain.setLayoutParams(vgMainParams);
         //// Menu Shadow
         LinearLayout.LayoutParams shadowParams = new LinearLayout.LayoutParams(shadowWidth, LinearLayout.LayoutParams.FILL_PARENT);
@@ -133,10 +129,10 @@ public class MainActivity extends Activity {
     	TranslateAnimation ta = null;
     	switch(menuMode) {
     	case MENU_CATEGORY:
-    		ta = new TranslateAnimation(0, display.widthPixels-menuBtnWidth, 0, 0);
+    		ta = new TranslateAnimation(0, NuvoApplication.widthPixels-menuBtnWidth, 0, 0);
     		break;
     	case MENU_NOTIFICATION:
-    		ta = new TranslateAnimation(0, -display.widthPixels+menuBtnWidth, 0, 0);
+    		ta = new TranslateAnimation(0, -NuvoApplication.widthPixels+menuBtnWidth, 0, 0);
     		break;
     	}
 		ta.setDuration(animTime);
@@ -184,10 +180,10 @@ public class MainActivity extends Activity {
 			FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) viewMain.getLayoutParams();
 			switch(menuMode) {
 			case MENU_CATEGORY:
-				param.leftMargin = display.widthPixels-shadowWidth-menuBtnWidth;
+				param.leftMargin = NuvoApplication.widthPixels-shadowWidth-menuBtnWidth;
 				break;
 			case MENU_NOTIFICATION:
-				param.leftMargin = -display.widthPixels-shadowWidth+menuBtnWidth;
+				param.leftMargin = -NuvoApplication.widthPixels-shadowWidth+menuBtnWidth;
 				break;
 			}
 			viewMain.setLayoutParams(param);
@@ -201,10 +197,10 @@ public class MainActivity extends Activity {
     	TranslateAnimation ta = null;
     	switch(menuMode) {
     	case MENU_CATEGORY:
-    		ta = new TranslateAnimation(0, -(display.widthPixels-menuBtnWidth), 0, 0);
+    		ta = new TranslateAnimation(0, -(NuvoApplication.widthPixels-menuBtnWidth), 0, 0);
     		break;
     	case MENU_NOTIFICATION:
-    		ta = new TranslateAnimation(0, -(-display.widthPixels+menuBtnWidth), 0, 0);
+    		ta = new TranslateAnimation(0, -(-NuvoApplication.widthPixels+menuBtnWidth), 0, 0);
     		break;
     	}
 		ta.setDuration(animTime);
