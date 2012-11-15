@@ -30,8 +30,9 @@
 			        android:id="@+id/ivTitle"
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/title_bar"
-			        android:scaleType="fitXY"/>
+			        android:adjustViewBounds="true"
+			        android:scaleType="fitXY"
+			        android:src="@drawable/title_bar"/>
 			    <Button 
 			        android:id="@+id/btnCateMenu"
 			        android:layout_width="wrap_content"
