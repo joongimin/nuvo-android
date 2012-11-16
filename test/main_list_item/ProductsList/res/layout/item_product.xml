@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="2dp"
+    android:padding="3dp">
     
-
+    <com.example.productslist.ImageDownView 
+        android:id="@+id/ivImage"
+        android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		android:cropToPadding="false"
+		android:scaleType="fitXY"
+		android:src="@drawable/test"/>
+    	<ProgressBar
+		android:id="@+id/pbDownload"
+		style="?android:attr/progressBarStyleLarge"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/ivImage"
+		android:layout_alignTop="@+id/ivImage"
+		android:layout_alignRight="@+id/ivImage"
+		android:layout_alignBottom="@+id/ivImage" />
+    
+    <ImageView 
+        android:id="@+id/ivLikeHeart"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_margin="2dp"
+		android:src="@drawable/like_heart"/>
+    
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivImage"
+        android:text="@+id/tvName"/>
+    
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvName"
+        android:textColor="#FFFF0000"
+        android:text="@+id/tvPrice"/>
+    
 </RelativeLayout>
