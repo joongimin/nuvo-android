@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
         gvList.setAdapter(productsAdapter);
         
         http = new HttpManager();
-        
         new Thread(new Runnable() {
 			@Override
 			public void run() {

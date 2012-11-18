@@ -7,8 +7,10 @@ import com.example.productslist.Products.Product;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
@@ -64,6 +66,8 @@ public class ProductsAdpater extends BaseAdapter {
 			holder = new ProductViewHolder();
 			holder.ivImage = (ImageView) convertView.findViewById(R.id.ivImage);
 			holder.ivLikeHeart = (ImageView) convertView.findViewById(R.id.ivLikeHeart);
+			holder.ivLikeHeart.setId(position);
+			holder.ivLikeHeart.setOnClickListener(onClickListener);
 			holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
 			holder.tvPrice = (TextView) convertView.findViewById(R.id.tvPrice);
 			
@@ -82,6 +86,13 @@ public class ProductsAdpater extends BaseAdapter {
 		convertView.setClickable(false);
 		return convertView;
 	}
+	
+	OnClickListener onClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Log.i("ML", ""+v.getId());
+		}
+	};
 	
 	private class ProductViewHolder {
 		public ImageView ivImage;
