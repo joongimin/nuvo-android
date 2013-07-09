@@ -9,8 +9,9 @@
         android:id="@+id/viewMain"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="horizontal">
-	    <ImageView
+        android:orientation="horizontal"
+    	android:layout_gravity="left|top">
+	    <ImageView68
 	        android:id="@+id/ivShadowLeft"
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
